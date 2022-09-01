@@ -121,5 +121,4 @@ yarn.lock
 node_modules/
 
 # Others
-quickstart-guide/.env
 package-lock.json

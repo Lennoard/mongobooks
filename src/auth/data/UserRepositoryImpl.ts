@@ -23,12 +23,12 @@ export class UserRepositoryImpl implements UserRepository {
 
   public async insert(user: User): Promise<User | null> {
     let result = await this.getUsersCollection().insertOne(user);
-    user.id = result.insertedId.toString();
+    user._id = result.insertedId.toString();
     return user;
   }
 
   public async update(user: Partial<User>): Promise<void | null> {
-    await this.getUsersCollection().updateOne({ id: user.id }, user);
+    await this.getUsersCollection().updateOne({ _id: user._id }, user);
   }
 
   private getUsersCollection = () => {
