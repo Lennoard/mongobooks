@@ -36,6 +36,10 @@ export class BooksRepositoryImpl implements BooksRepository {
     await this.getBooksCollection().updateOne({ id: book.id }, book);
   }
 
+  public async remove(book: Partial<Book>): Promise<void> {
+    await this.getBooksCollection().deleteOne({ id: book.id });
+  }
+
   public setUserId(id: string) {
     this.userId = id;
   }
