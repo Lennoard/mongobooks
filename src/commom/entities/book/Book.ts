@@ -5,7 +5,8 @@ export interface Book {
   id?: string;
   owner: string;
   title: string;
-  tags: Array<string>;
-  notes: Array<Note> | undefined;
-  status: BookStatus
+  tags?: string[];
+  notes?: Note[];
+  status: BookStatus;
+  currentPage: number;
 }
