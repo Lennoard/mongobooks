@@ -21,7 +21,7 @@ export class BookController {
       return response.status(401).json({ error: "Invalid login or password" });
     }
 
-    this.booksRepository.setUserId(user._id || "");
+    this.booksRepository.setUserId(user.id || "");
 
     const books = this.booksRepository.getAll();
     return response.status(200).json({ books: books });

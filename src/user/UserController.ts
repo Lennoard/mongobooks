@@ -29,7 +29,7 @@ export class UserController {
     const activationCode = new Random().randomValidationCode();
     const code: UserCode = {
       code: activationCode,
-      userId: user._id || "",
+      userId: user.id || "",
       generationTime: Date.now(),
       phoneNumber: ''
     };
@@ -50,7 +50,7 @@ export class UserController {
     }
 
     const code = await this.userCodeRepository.get({
-      userId: user._id || "",
+      userId: user.id || "",
       code: allegedCode,
     });    
 
@@ -77,7 +77,7 @@ export class UserController {
     const smsCode = new Random().randomSmsCode();
     const code: UserCode = {
       code: smsCode,
-      userId: user._id || "",
+      userId: user.id || "",
       generationTime: Date.now(),
       phoneNumber: phoneNumber
     };
@@ -106,7 +106,7 @@ export class UserController {
     }
 
     const code = await this.smsCodeRepository.get({
-      userId: user._id || "",
+      userId: user.id || "",
       code: allegedCode,
       phoneNumber: phoneNumber
     }); 

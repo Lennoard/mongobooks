@@ -13,22 +13,31 @@ export class UserRepositoryImpl implements UserRepository {
   }
 
   public async get(filter: Filter<User>): Promise<User | null> {
-    return await this.getUsersCollection().findOne<User>(filter);
+    const user = await this.getUsersCollection().findOne<User>(filter);
+    if (user == null) return null;
+
+    user.id = user._id?.toString();
+    return user;
   }
 
   public async getBy(name?: String): Promise<User | null> {
     if (!name) return null;
-    return await this.getUsersCollection().findOne<User>({ name: name });
+
+    const user = await this.getUsersCollection().findOne<User>({ name: name });
+    if (user == null) return null;
+
+    user.id = user._id?.toString();
+    return user;
   }
 
   public async insert(user: User): Promise<User | null> {
     let result = await this.getUsersCollection().insertOne(user);
-    user._id = result.insertedId.toString();
+    user.id = result.insertedId.toString();
     return user;
   }
 
   public async update(user: Partial<User>): Promise<void | null> {
-    await this.getUsersCollection().updateOne({ _id: user._id }, user);
+    await this.getUsersCollection().updateOne({ id: user.id }, user);
   }
 
   private getUsersCollection = () => {
