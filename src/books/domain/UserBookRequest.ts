@@ -1,4 +1,4 @@
-import { Book } from "../commom/entities/book/Book";
+import { Book } from "../../commom/entities/book/Book";
 
 export interface UserBookRequest {
   login: string;

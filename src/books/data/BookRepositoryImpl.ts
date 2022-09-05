@@ -1,5 +1,5 @@
 import { BooksRepository } from "../domain/BooksRepository";
-import { Db, Filter, MongoClient } from "mongodb";
+import { Db, Filter, MongoClient, ObjectId } from "mongodb";
 import { Book } from "../../commom/entities/book/Book";
 
 export class BooksRepositoryImpl implements BooksRepository {
@@ -18,7 +18,7 @@ export class BooksRepositoryImpl implements BooksRepository {
   }
 
   public async getAll(): Promise<Book[] | null> {
-   return await this.getBooksCollection().find().toArray();
+    return await this.getBooksCollection().find().toArray();
   }
 
   public async getBy(name?: String): Promise<Book | null> {
@@ -33,7 +33,10 @@ export class BooksRepositoryImpl implements BooksRepository {
   }
 
   public async update(book: Partial<Book>): Promise<void | null> {
-    await this.getBooksCollection().updateOne({ id: book.id }, book);
+    await this.getBooksCollection().findOneAndUpdate(
+      { _id: new ObjectId(book.id) },
+      { $set: book }
+    );
   }
 
   public async remove(book: Partial<Book>): Promise<void> {
