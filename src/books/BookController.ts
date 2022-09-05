@@ -5,7 +5,7 @@ import { UserRepository } from "../auth/domain/UserRepository";
 import { BookStatus } from "../commom/entities/book/BookStatus";
 import { BooksRepositoryImpl } from "./data/BookRepositoryImpl";
 import { BooksRepository } from "./domain/BooksRepository";
-import { UserBookRequest } from "./UserBookRequest";
+import { UserBookRequest } from "./domain/UserBookRequest";
 
 export class BookController {
   private booksRepository: BooksRepository;
